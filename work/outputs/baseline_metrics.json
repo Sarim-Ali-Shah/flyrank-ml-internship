@@ -1,0 +1,16 @@
+{
+  "assignment": "ML-07",
+  "rule_name": "stale_visible_page_baseline",
+  "score_formula": "stale (days_since_last_update >= 180) * visible (impressions_90d >= 500) * impressions_90d",
+  "reason_code": "stale_visible_page",
+  "action_label": "refresh",
+  "catalog_total_pages": 30000,
+  "catalog_base_decline_rate": 0.5421,
+  "flagged_pages_count": 17,
+  "precision_at_10": 1.0,
+  "precision_at_20": 0.9,
+  "precision_at_50": 0.6,
+  "client_concentration_top_10": 1.0,
+  "signal_1_audit": "Content staleness (days_since_last_update) -> Verdict: MIXED",
+  "signal_2_audit": "Search volume / exposure (impressions_90d) -> Verdict: MIXED"
+}
