@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Evidence-Based Content Refresh &amp; Decay Prevention | FlyRank ML Research</title>
-  <meta name="description" content="Prioritizing Organic SEO Remediation via Grouped-Client Validation on 79M Search Interactions. A research paper and operational playbook by Sarim Ali Shah.">
+  <title>Evidence-Based Content Refresh &amp; Decay Prevention | FlyRank ML Research Case Study</title>
+  <meta name="description" content="Prioritizing Organic SEO Remediation via Grouped-Client Validation on 79M Search Interactions. A research paper and operational case study by Sarim Ali Shah.">
   <meta name="author" content="Sarim Ali Shah">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -387,6 +387,18 @@
       color: #0f172a;
     }
 
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 16px 0;
+    }
+
     /* Badges */
     .badge {
       display: inline-block;
@@ -458,9 +470,9 @@
 
   <!-- Header -->
   <header class="paper-header">
-    <div class="paper-tagline">FlyRank Research · Capstone Research Paper</div>
+    <div class="paper-tagline">FlyRank Research · Capstone Case Study</div>
     <h1 class="paper-title">Evidence-Based Content Refresh &amp; Decay Prevention: Prioritizing Organic SEO Remediation via Grouped-Client Validation on 79M Search Interactions</h1>
-    <div class="paper-subtitle">An empirical decision-support framework that models search exposure, striking distance, and staleness to protect enterprise organic search equity under editorial capacity constraints.</div>
+    <div class="paper-subtitle">A multi-tenant machine learning decision-support framework and content playbook addressing the core FlyRank editorial capacity problem.</div>
     
     <div class="meta-grid">
       <div class="meta-item">
@@ -473,7 +485,7 @@
       </div>
       <div class="meta-item">
         <strong>Corpus Scope</strong>
-        <span>79M Search Console Events</span>
+        <span>79M Search Console Events (32 Clients)</span>
       </div>
       <div class="meta-item">
         <strong>Deployment Date</strong>
@@ -504,7 +516,7 @@
           1. Abstract
         </h2>
         <p>
-          Organic search decay causes enterprise websites to lose high-ranking visibility silently, yet editorial teams can realistically review only 20 to 50 URLs per sprint. To resolve this operational bottleneck, we evaluated machine learning ranking models against traditional heuristic baselines using the FlyRank production corpus of 79 million search console events aggregated into 30,000 URLs across 32 clients. Applying an honest client-grouped validation design (25 training clients, 7 held-out evaluation clients), we found that naive random row splits severely overstate predictive power (AUC 0.6611 vs. 0.5911) by memorizing domain authority. On the true grouped holdout, an interpretable Decision Tree achieved 68.0% Precision@50 and 70.0% Precision@20 (surpassing the 51.1% random baseline by +16.9 percentage points), successfully uncovering at-risk URLs that simple staleness rules missed entirely. We operationalized these predictions into an automated Content Action Playbook with archetype reason codes (CTR overhaul, striking-distance expansion, and pillar defense), establishing a trustworthy decision-support workflow with strict human-in-the-loop governance.
+          In FlyRank's algorithmic search platform, identifying decaying organic content across multi-tenant enterprise domains is a critical operational challenge: client catalogs span tens of thousands of URLs, but editorial capacity is strictly capped at reviewing 20 to 50 articles per sprint. To solve this bottleneck without relying on brittle staleness rules or blind generative AI rewrites, we evaluated machine learning ranking models against heuristic baselines on FlyRank's 79-million-row production dataset (aggregated to 30,000 URLs across 32 clients). Enforcing a rigorous client-grouped validation design (25 training clients, 7 held-out evaluation clients), we showed that naive random splits artificially inflate AUC (0.6611 vs. 0.5911) by memorizing client domain authority. On the true grouped holdout, an interpretable Decision Tree achieved 68.0% Precision@50 and 70.0% Precision@20 (surpassing the 51.1% random baseline by +16.9 percentage points), successfully uncovering at-risk URLs that simple staleness rules missed entirely. We operationalized these predictions into an automated Content Action Playbook with archetype reason codes (CTR overhaul, striking-distance expansion, and pillar defense), establishing a trustworthy decision-support workflow with strict human-in-the-loop governance.
         </p>
       </div>
 
@@ -530,19 +542,23 @@
 
     <!-- 2. Introduction / Problem Statement -->
     <section id="introduction">
-      <h2 class="section-heading"><span class="sec-num">02.</span> Introduction &amp; Problem Statement</h2>
+      <h2 class="section-heading"><span class="sec-num">02.</span> Introduction &amp; The FlyRank Case Study Problem</h2>
       <p>
-        In organic search marketing, content decay is the gradual, unannounced loss of impressions, average ranking position, and click-through volume on historically performing URLs. Because search engine algorithms continuously re-evaluate document freshness, depth, and competitor additions, content that remains static inevitably decays.
+        FlyRank operates an AI-driven search intelligence engine designed to detect SEO anomalies, keyword opportunities, and content performance shifts across diverse enterprise customer tenants. Within FlyRank's core architecture, <strong>Lane 2 (Refresh / Content Opportunity Scoring)</strong> addresses the most expensive dilemma in organic search operations: <em>content decay triage</em>.
       </p>
       <p>
-        However, the real failure mode in enterprise SEO is not a lack of decay awareness—it is <strong>editorial bandwidth allocation</strong>. While an enterprise catalog frequently encompasses 10,000 to 100,000 indexable URLs, a content engineering department can realistically research, refresh, and republish only 20 to 50 articles per two-week sprint. Naive operational heuristics frequently dominate current practice:
+        High-performing articles inevitably experience decay over time as search engines refresh ranking algorithms, competitor publications add topical depth, and searcher intent drifts. When high-volume URLs drop from Page 1 to Page 2, client organizations experience severe organic pipeline losses.
+      </p>
+      <p>
+        However, the fundamental bottleneck for FlyRank's enterprise users is <strong>editorial bandwidth allocation</strong>:
       </p>
       <ul>
-        <li><strong>"Oldest Article First":</strong> Teams sort their CMS by publication date, wasting hundreds of hours updating zero-impression ghost pages that possess no organic search demand.</li>
-        <li><strong>Indiscriminate Generative LLM Rewriting:</strong> Organizations deploy automated scripts to rewrite articles en masse, diluting domain authority, breaking structured schemas, and introducing factual hallucinations.</li>
+        <li>An enterprise client inventory frequently encompasses 10,000 to 50,000 indexable URLs.</li>
+        <li>An in-house editorial engineering department can realistically research, refresh, and republish only <strong>20 to 50 articles per sprint</strong>.</li>
+        <li><strong>The Heuristic Trap:</strong> In the absence of calibrated machine learning, teams fall back on naive heuristics—such as updating whatever article is oldest (wasting hundreds of hours on zero-impression ghost pages) or running blanket generative LLM rewrites (hallucinating facts and degrading topical authority).</li>
       </ul>
       <p>
-        This research solves this decision dilemma: <em>Which visible, high-impact URLs are at genuine risk of organic decay, and what specific editorial remediation archetype should be assigned to maximize organic return?</em>
+        This research provides the empirical solution for FlyRank's Lane 2: <em>Which visible, high-impact URLs are at genuine statistical risk of organic decay, and what specific editorial remediation archetype should be assigned to maximize organic return?</em>
       </p>
     </section>
 
@@ -824,12 +840,79 @@
       </ul>
     </section>
 
+    <!-- ML-12: Showcase & Communication Assets -->
+    <section id="showcase-assets">
+      <h2 class="section-heading"><span class="sec-num">09.</span> Showcase Presentation &amp; Shareable Assets</h2>
+      <p>
+        To make this research travel across technical reviewers, hiring managers, and the broader SEO engineering community, we provide standardized presentation assets:
+      </p>
+
+      <h3>A. 5-Minute Technical Demo Outline</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Pacing</th>
+              <th>Rubric Item</th>
+              <th>Core Narrative &amp; Screen Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Min 1</strong></td>
+              <td><strong>The Question</strong></td>
+              <td><em>FlyRank's content decay dilemma:</em> Multi-tenant clients have 30,000+ URLs but only 20–50 reviews per sprint. Oldest-first heuristics waste budget on ghost pages; indiscriminate LLM rewrites introduce hallucinations.</td>
+            </tr>
+            <tr>
+              <td><strong>Min 2</strong></td>
+              <td><strong>The Method</strong></td>
+              <td><em>Honest validation design:</em> 79M rows across 32 clients. Proving that random row splits leak client authority (0.6611 AUC). Enforcing <code>GroupShuffleSplit</code> across 25 train vs 7 held-out clients (0.5911 AUC).</td>
+            </tr>
+            <tr>
+              <td><strong>Min 3</strong></td>
+              <td><strong>One Chart</strong></td>
+              <td><em>Figure 1 (Model Comparison):</em> Precision@K vs. 51.1% base rate. Highlighting stable elevation across top-50 queues for Decision Tree.</td>
+            </tr>
+            <tr>
+              <td><strong>Min 4</strong></td>
+              <td><strong>One Honest Result</strong></td>
+              <td><em>Decision Tree delivers 68.0% Precision@50</em> (+16.9pp lift over base rate). Random Forest overfit to outlier volume (P@20=40%). Explicit disclaimer: decision-support, not causal ranking claims.</td>
+            </tr>
+            <tr>
+              <td><strong>Min 5</strong></td>
+              <td><strong>One Recommendation</strong></td>
+              <td><em>Content Action Playbook:</em> Triage inventory into <code>ctr_and_refresh</code> and <code>expand_and_refresh</code>. Enforce human review and strict NO-GO rules on automated rewriting.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>B. Two Shareable Cuts of the Work</h3>
+      <h4>Cut 1: Methodology Social Post (LinkedIn / X Ready)</h4>
+      <pre>Most content refresh workflows in SEO rely on naive heuristics: "update whatever is oldest" or run automated LLM rewrites across thousands of URLs. Both waste immense editorial resources.
+
+Working with FlyRank's 79-million-row production search dataset, I built a machine learning decision-support framework to prioritize content remediation before organic decay takes hold:
+
+Key findings & methodology:
+- Naive validation leaks: A standard random split overstates AUC (0.6611) by memorizing client domain authority. A true grouped-client split reveals the honest baseline (0.5911).
+- Decision Trees beat complex ensembles operationally: achieving 68.0% Precision@50 on held-out client websites (vs a 51.1% base rate), while preserving interpretable rule structures for editors.
+- Actionable Archetypes: We translate raw probabilities into a structured playbook (CTR fixes, striking-distance expansion, pillar defense) with a strict human-in-the-loop review policy.
+
+Full research paper, validation audit, and code: https://sarim-ali-shah.github.io/flyrank-ml-internship/
+Data courtesy of https://flyrank.ai/</pre>
+
+      <h4>Cut 2: 3-Sentence Employer-Facing Summary ("What I built, on what data, what it showed")</h4>
+      <blockquote style="border-left: 4px solid var(--primary); padding: 12px 18px; background: #f8fafc; font-style: italic; color: #334155; border-radius: 4px;">
+        "Engineered an evidence-based content opportunity and decay ranking pipeline evaluated on 79M search events across 32 enterprise tenants, deploying a Decision Tree framework that achieved 68.0% Precision@50 on unseen client domains (a +16.9pp lift over base rate). Enforced rigorous grouped-client validation and leakage audits to eliminate domain-memorization bias, replacing arbitrary editorial guesswork with statistically validated priority scores. Delivered an end-to-end operational playbook pairing machine learning rankings with human-in-the-loop reason codes, published as a fully reproducible, public-safe research paper."
+      </blockquote>
+    </section>
+
   </main>
 
-  <!-- 9. Acknowledgments & Data Credit -->
+  <!-- 10. Acknowledgments & Data Credit -->
   <footer class="paper-footer">
     <div class="ack-box">
-      <h3>9. Acknowledgments &amp; Data Credit</h3>
+      <h3>10. Acknowledgments &amp; Data Credit</h3>
       <p>
         <strong>Built on the FlyRank ML Internship dataset.</strong> We express our sincere gratitude to the research and engineering team at <a href="https://flyrank.ai/" target="_blank" rel="noopener">FlyRank (https://flyrank.ai/)</a> for curating, anonymizing, and providing the 79-million-row production search console corpus that made this research possible. The methodologies and critical evaluation practices presented here directly reflect FlyRank's commitment to honest, leak-free applied machine learning.
       </p>
