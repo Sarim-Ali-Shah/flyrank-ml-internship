@@ -1,0 +1,46 @@
+{
+  "assignment": "ML-08",
+  "split_type": "GroupShuffleSplit (client_id)",
+  "train_rows": 23837,
+  "test_rows": 6163,
+  "test_clients": 7,
+  "test_base_rate": 0.511,
+  "results": [
+    {
+      "Model": "Baseline (Hand Rule)",
+      "P@10": 0.8,
+      "P@20": 0.8,
+      "P@50": 0.7,
+      "P@100": 0.64,
+      "ROC-AUC": 0.5,
+      "Brier Score": null
+    },
+    {
+      "Model": "Logistic Regression",
+      "P@10": 0.5,
+      "P@20": 0.7,
+      "P@50": 0.62,
+      "P@100": 0.62,
+      "ROC-AUC": 0.5748733601191687,
+      "Brier Score": 0.24819895397219352
+    },
+    {
+      "Model": "Decision Tree (d=3)",
+      "P@10": 0.7,
+      "P@20": 0.7,
+      "P@50": 0.68,
+      "P@100": 0.61,
+      "ROC-AUC": 0.5911025355791739,
+      "Brier Score": 0.24941863297647707
+    },
+    {
+      "Model": "Random Forest (d=5)",
+      "P@10": 0.4,
+      "P@20": 0.4,
+      "P@50": 0.58,
+      "P@100": 0.56,
+      "ROC-AUC": 0.5946484943872598,
+      "Brier Score": 0.2424217125949947
+    }
+  ]
+}
