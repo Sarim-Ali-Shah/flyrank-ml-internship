@@ -1,0 +1,30 @@
+{
+  "assignment": "ML-10",
+  "lane": "Lane 2 \u2014 Refresh / Content Opportunity Scoring",
+  "catalog_total_urls": 30000,
+  "action_mix_counts": {
+    "monitor": 19853,
+    "ctr_and_refresh": 4889,
+    "expand_and_refresh": 3394,
+    "defend_pillar": 1828,
+    "expand_content": 27,
+    "refresh_content": 9
+  },
+  "reason_code_counts": {
+    "low_priority_tail": 19853,
+    "page_one_decay_risk": 4889,
+    "striking_distance_decay": 3394,
+    "evergreen_stable": 1828,
+    "thin_content_gap": 27,
+    "stale_high_exposure": 9
+  },
+  "high_priority_inventory_count": 4275,
+  "top_action_candidate": {
+    "content_id": "content_5fe46e04994d",
+    "client_id": "client_4e07408562",
+    "action": "ctr_and_refresh",
+    "priority_score": 115.2,
+    "impressions_90d": 517715,
+    "avg_position": 4.2
+  }
+}
